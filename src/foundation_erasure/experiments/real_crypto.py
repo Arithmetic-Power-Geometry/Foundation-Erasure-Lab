@@ -28,7 +28,15 @@ def ecc_suite():
 
 def mldsa_suite():
     from pqcrypto.sign import ml_dsa_44
-    pk,sk=ml_dsa_44.generate_keypair()
+    keygen = getattr(ml_dsa_44, "generate_keypair", None) or getattr(ml_dsa_44, "generate_keypair", None) or getattr(ml_dsa_44, "keypair", None)
+    if keygen is None:
+        # pqcrypto releases expose generate_keypair in some versions and keypair in others.
+        # Fall back to the package's public generate_keypair-like callable discovered by prefix.
+        candidates=[getattr(ml_dsa_44,n) for n in dir(ml_dsa_44) if ("key" in n.lower() and "gen" in n.lower()) and callable(getattr(ml_dsa_44,n))]
+        if not candidates:
+            raise RuntimeError("No ML-DSA key-generation API found: "+",".join(dir(ml_dsa_44)))
+        keygen=candidates[0]
+    pk,sk=keygen()
     def sign(): return ml_dsa_44.sign(sk,MESSAGE)
     sig=sign()
     def verify(): assert ml_dsa_44.verify(pk,MESSAGE,sig)
