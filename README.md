@@ -25,18 +25,31 @@ This repository develops and tests four core ideas:
 
 ## Baselines
 
+The comparative benchmark uses structural migration patterns rather than claiming full protocol implementations:
+
 - key rotation without foundation change
 - old-root wrapping under a new foundation
 - chained successor authorization
+- evidence-renewal-like dependency retention
+- dual/hybrid anchoring
+- proactive/key-refresh-like dependency retention
+- transparency-rollover-like dependency retention
 - semantic re-anchoring
+
+Standards such as ERS and trust-anchor rollover are treated as prior-art neighbors, not as faithfully implemented benchmark protocols.
 
 ## Attacks
 
 - retired-key compromise
-- retired-family collapse
+- modeled retired-family collapse
 - rollback
 - successor substitution
+- replay
 - fork / split-history attempt
+- history reordering and epoch omission
+- cumulative compromise across all retired epochs
+
+The collapse experiments evaluate whether compromised retired authority can change the current canonical state. They do not constitute cryptanalytic breaks of RSA, ECDSA, or ML-DSA.
 
 ## Reproducibility
 
@@ -48,6 +61,10 @@ python -m foundation_erasure.experiments.run_all --out results
 
 The GitHub Actions workflow runs tests, reproduces the benchmark suite, and uploads the generated `results/` directory as a workflow artifact.
 
+## Reproducible evidence
+
+The workflow also benchmarks real RSA-2048, ECDSA P-256, and ML-DSA-44 signing/verification primitives, traces the security resources consulted by the current-state verifier, tests the handoff retirement point, and exercises cumulative post-finalization attacks through 128 epochs.
+
 ## Status
 
-Research software under active development. Results are generated from code; no manuscript numbers are hard-coded.
+Research software under active development. Results are generated from executable code and workflow artifacts; no manuscript values are hard-coded.
