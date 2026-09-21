@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this software or the Foundation Erasure framework, please cite the work below."
+title: "Foundation Erasure: Bounded Cryptographic Dependence After Repeated Algorithm Migration"
+type: software
+authors:
+  - family-names: "Akhtar"
+    given-names: "Mohammad Amir Khusru"
+    orcid: "https://orcid.org/0000-0002-3432-4199"
+version: "V1"
+date-released: "2026-09-21"
+doi: "10.5281/zenodo.22878898"
+url: "https://github.com/Arithmetic-Power-Geometry/Foundation-Erasure-Lab"
+repository-code: "https://github.com/Arithmetic-Power-Geometry/Foundation-Erasure-Lab"
+license: MIT
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Akhtar"
+      given-names: "Mohammad Amir Khusru"
+      orcid: "https://orcid.org/0000-0002-3432-4199"
+  title: "Foundation Erasure: Bounded Cryptographic Dependence After Repeated Algorithm Migration"
+  year: 2026
+  doi: "10.5281/zenodo.22878898"
+  publisher:
+    name: "Zenodo"
+  version: "V1"
+copyright: "Copyright © 2026 Mohammad Amir Khusru Akhtar"
