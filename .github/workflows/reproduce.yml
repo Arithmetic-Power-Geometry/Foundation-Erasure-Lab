@@ -30,7 +30,7 @@ jobs:
         run: pytest -q
 
       - name: Generate reproducible artifacts
-        run: python -m foundation_erasure.experiments.run_all --out results
+        run: python -m foundation_erasure.experiments.run_all --out results\n          python -m foundation_erasure.experiments.multi_epoch --out results
 
       - name: Show generated results
         run: |
