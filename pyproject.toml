@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "foundation-erasure-lab"
-version = "0.1.0"
+version = "0.2.0"
 description = "Reproducible experiments for cryptographic foundation erasure and telescoping security."
 requires-python = ">=3.10"
-dependencies = []
+dependencies = ["cryptography>=46.0", "pqcrypto>=0.3.4"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
