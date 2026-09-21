@@ -1,29 +1,31 @@
 # Foundation Erasure Lab
 
-Software-first reproducible experiments for cryptographic retirement, semantic re-anchoring, retired-foundation collapse, and telescoping security.
+Reproducible research software for cryptographic retirement, semantic re-anchoring with atomic finality, retired-foundation collapse, and telescoping security.
 
 ## Research objective
 
-A cryptographic migration is considered complete only when compromise of a retired foundation no longer increases the adversary's ability to alter the current trusted state.
+A cryptographic migration is considered fully retired for current-state security only when compromise of a retired foundation no longer increases an adversary's ability to alter the current accepted canonical state.
 
-This repository develops and tests four core ideas:
+This repository implements and evaluates the following core concepts:
 
-- **Active Security Frontier (ASF)**: the resources whose compromise can currently affect accepted canonical state.
-- **Foundation Erasure (FE)**: a retired foundation is absent from the current ASF.
-- **Semantic Re-Anchoring (SRA)**: the successor foundation independently binds the canonical semantic state instead of merely wrapping an old digest.
-- **Telescoping Security (TS)**: after finalized handoff, retired foundations disappear from the current security dependency set.
+- **Active Security Frontier (ASF)**: security resources whose compromise can increase an adversary's ability to replace the current canonical state.
+- **Retirement Debt (RD)**: retired foundations that remain in the current active security frontier.
+- **Foundation Erasure (FE)**: a retired foundation is absent from the current active security frontier.
+- **Semantic Re-Anchoring with Atomic Finality**: the successor independently authenticates the complete decision-relevant state; finalization establishes the successor as the unique current authority and removes retired authority from current-state verification.
+- **Post-Finalization Collapse Non-Interference (PFCNI)**: collapse of a retired foundation after finalization does not increase the adversary's current-state replacement capability.
+- **Retirement Point**: the transition point after which retired authority no longer has current write authority in the implemented state machine.
+- **Telescoping Security**: cryptographic history can grow while current-state security dependence remains bounded by active resources rather than accumulating across retired foundations.
 
-## Software-first workflow
+## Experimental workflow
 
-1. Implement baseline migration strategies.
-2. Implement semantic re-anchoring.
-3. Execute retired-key and retired-family collapse attacks.
-4. Measure attack success, retirement debt, active-security-frontier size, and runtime overhead.
-5. Generate CSV/JSON artifacts through GitHub Actions.
-6. Compare methods from generated artifacts.
-7. Write the manuscript only after the empirical separation is stable and reproducible.
+1. Implement structural migration comparators and semantic re-anchoring.
+2. Exercise migration, authorization, and atomic finalization.
+3. Execute retired-key, retired-family, rollback, replay, fork, substitution, reordering, omission, and cumulative-collapse scenarios.
+4. Measure attack acceptance, retirement debt, active-security-frontier size, verifier dependencies, and primitive-level performance.
+5. Produce machine-readable CSV and JSON result artifacts.
+6. Reproduce the complete experimental suite through GitHub Actions.
 
-## Baselines
+## Comparators
 
 The comparative benchmark uses structural migration patterns rather than claiming full protocol implementations:
 
@@ -34,11 +36,11 @@ The comparative benchmark uses structural migration patterns rather than claimin
 - dual/hybrid anchoring
 - proactive/key-refresh-like dependency retention
 - transparency-rollover-like dependency retention
-- semantic re-anchoring
+- semantic re-anchoring with atomic finality
 
-Standards such as ERS and trust-anchor rollover are treated as prior-art neighbors, not as faithfully implemented benchmark protocols.
+Standards and mechanisms such as evidence renewal and trust-anchor rollover are prior-art neighbors, not faithfully implemented protocol baselines in this repository.
 
-## Attacks
+## Adversarial scenarios
 
 - retired-key compromise
 - modeled retired-family collapse
@@ -46,25 +48,50 @@ Standards such as ERS and trust-anchor rollover are treated as prior-art neighbo
 - successor substitution
 - replay
 - fork / split-history attempt
-- history reordering and epoch omission
-- cumulative compromise across all retired epochs
+- history reordering
+- epoch omission
+- cumulative compromise across retired epochs
 
-The collapse experiments evaluate whether compromised retired authority can change the current canonical state. They do not constitute cryptanalytic breaks of RSA, ECDSA, or ML-DSA.
+The collapse experiments evaluate whether compromised retired authority can change the current canonical state. They do **not** constitute cryptanalytic breaks of RSA, ECDSA, or ML-DSA.
 
 ## Reproducibility
 
-Run:
+Install the package and run:
 
 ```bash
 python -m foundation_erasure.experiments.run_all --out results
 ```
 
-The GitHub Actions workflow runs tests, reproduces the benchmark suite, and uploads the generated `results/` directory as a workflow artifact.
+The GitHub Actions workflow runs the test suite and experimental protocols and uploads the generated `results/` directory as a workflow artifact.
 
-## Reproducible evidence
+The experimental suite includes real RSA-2048, ECDSA P-256, and ML-DSA-44 signing/verification measurements; active-security-frontier and retirement-debt experiments; verifier dependency traces; retirement-point analysis; cross-family post-finalization state-replacement attempts; and cumulative-collapse evaluation through 128 epochs.
 
-The workflow also benchmarks real RSA-2048, ECDSA P-256, and ML-DSA-44 signing/verification primitives, traces the security resources consulted by the current-state verifier, tests the handoff retirement point, and exercises cumulative post-finalization attacks through 128 epochs.
+The protocol-state experiments model compromise as adversarial control of retired authority and test whether that authority can modify the currently accepted canonical state. Primitive benchmarks and protocol-state security experiments are therefore reported as distinct evidence layers.
+
+## Scope
+
+The software evaluates current-state cryptographic retirement. Historical provenance is a separate security objective and may continue to require archival evidence, timestamps, transparency mechanisms, certificates, or other historical verification resources.
+
+The current foundation and active finality mechanism remain security-critical resources. Foundation Erasure removes retired foundations from current-state security dependence; it does not eliminate all cryptographic trust.
+
+## Citation
+
+If you use this software or the Foundation Erasure framework, cite:
+
+Akhtar, M. A. K. (2026). *Foundation Erasure: Bounded Cryptographic Dependence After Repeated Algorithm Migration* (Version V1). Zenodo. https://doi.org/10.5281/zenodo.22878898
+
+```bibtex
+@misc{Akhtar2026FoundationErasure,
+  author    = {Akhtar, Mohammad Amir Khusru},
+  title     = {Foundation Erasure: Bounded Cryptographic Dependence After Repeated Algorithm Migration},
+  year      = {2026},
+  version   = {V1},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.22878898},
+  url       = {https://doi.org/10.5281/zenodo.22878898}
+}
+```
 
 ## Status
 
-Research software under active development. Results are generated from executable code and workflow artifacts; no manuscript values are hard-coded.
+Research software under active development. Results are produced by executable experiments and reproducible workflows.
