@@ -39,7 +39,9 @@ def mldsa_suite():
     pk,sk=keygen()
     def sign(): return ml_dsa_44.sign(sk,MESSAGE)
     sig=sign()
-    def verify(): assert ml_dsa_44.verify(pk,MESSAGE,sig)
+    def verify():
+        result=ml_dsa_44.verify(pk,MESSAGE,sig)
+        if result is False: raise AssertionError("ML-DSA valid signature rejected")
     return sk,pk,sign,verify,len(sig)
 
 def run(out:Path):
