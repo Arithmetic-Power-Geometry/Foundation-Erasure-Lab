@@ -31,6 +31,7 @@ jobs:
           python -m foundation_erasure.experiments.hard_collapse --out results
           python -m foundation_erasure.experiments.retirement_point --out results
           python -m foundation_erasure.experiments.verifier_trace --out results
+          python -m foundation_erasure.experiments.executable_collapse --out results
       - name: Show summaries
         run: |
           cat results/comparison_summary.csv
@@ -39,6 +40,7 @@ jobs:
           cat results/hard_collapse_matrix.csv
           cat results/retirement_point_matrix.csv
           cat results/verifier_trace.csv
+          cat results/executable_collapse_attacks.csv
       - uses: actions/upload-artifact@v4
         with:
           name: foundation-erasure-results
