@@ -28,13 +28,17 @@ jobs:
           python -m foundation_erasure.experiments.run_all --out results
           python -m foundation_erasure.experiments.multi_epoch --out results
           python -m foundation_erasure.experiments.real_crypto --out results
-          python -m foundation_erasure.experiments.hard_collapse --out results\n          python -m foundation_erasure.experiments.retirement_point --out results
+          python -m foundation_erasure.experiments.hard_collapse --out results
+          python -m foundation_erasure.experiments.retirement_point --out results
+          python -m foundation_erasure.experiments.verifier_trace --out results
       - name: Show summaries
         run: |
           cat results/comparison_summary.csv
           cat results/multi_epoch.csv
           cat results/real_crypto_performance.csv
-          cat results/hard_collapse_matrix.csv\n          cat results/retirement_point_matrix.csv
+          cat results/hard_collapse_matrix.csv
+          cat results/retirement_point_matrix.csv
+          cat results/verifier_trace.csv
       - uses: actions/upload-artifact@v4
         with:
           name: foundation-erasure-results
